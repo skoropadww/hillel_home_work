@@ -32,4 +32,6 @@ body {
 
 .btn {
   background: #fff;
+  padding: 5px 10px;
+  font-weight: 700;
 }
