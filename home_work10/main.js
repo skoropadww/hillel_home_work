@@ -7,7 +7,7 @@ function chunk(arr, chunkSize) {
   }
 
   if (chunkSize === 1){
-    console.log(arr);
+    return arr;
   }
 
   if (chunkSize !== 1 && chunkSize !== 0){
