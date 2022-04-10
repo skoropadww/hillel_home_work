@@ -76,10 +76,14 @@ const itSchool = {
   doneLesson(courseName) {
     const foundCourse = this.startedGroups.find((startedGroup) => startedGroup.courseName === courseName);
     if (foundCourse) {
+      if (foundCourse.passedLessons < foundCourse.totalLessons){
         foundCourse.passedLessons ++;
-      console.log(`Gorup name ${courseName} : completed classes ${foundCourse.passedLessons}`);   
+        console.log(`Gorup name ${courseName} : completed classes ${foundCourse.passedLessons}`);   
+      }else {
+        console.log(`All lessons are passed in this course ${courseName}`);
+      }
     } else {
-      console.log(`All lessons are passed in this course ${courseName}`);
+      console.log(`This group ${courseName} is not active`);
     }
   }
 };
