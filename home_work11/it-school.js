@@ -22,8 +22,10 @@ const itSchool = {
   },
 
   removeCourse(courseName){
-    if (this.availableCourses.includes(courseName)) {
-      this.availableCourses.pop(courseName);
+    if (this.availableCourses.find((item) => item === courseName)) {
+      let newArray = [];
+      newArray = this.availableCourses.filter((item) => item !== courseName);
+      this.availableCourses = newArray;
       console.log(`The course ${courseName} was removed from the curriculum`);
     }else {
       console.log(`We do not have this course : ${cousreName}`);
@@ -31,13 +33,13 @@ const itSchool = {
   },
 
 
-  startLearningGroup(courseName, amountOfStudents, totalLessons, passedLessons) {
+  startLearningGroup(courseName, amountOfStudents, totalLessons) {
     if (this.availableCourses.includes(courseName)) {
       if (amountOfStudents <= this.maxStudentsCountPerGroup) {
         if (!this.startedGroups.some((startedGroup) => startedGroup.courseName === courseName)) {
-          this.startedGroups.push({ courseName, amountOfStudents, totalLessons, passedLessons })
+          let passedLessons = 0;
+          this.startedGroups.push({ courseName, amountOfStudents, totalLessons, passedLessons})
           this.dispatch(this.__supportedEventTypes.GROUP_STARTED, courseName);
-          console.log(`Started ${courseName} : ${amountOfStudents} : ${totalLessons}  group!`);
         } else {
           console.log(`Started ${courseName} group!`);
         }
@@ -71,21 +73,15 @@ const itSchool = {
     this.__callback[eventName] && this.__callback[eventName](data);
   },
 
-  // Не понимаю как реализовать можно подсказку !!!
-
-  // doneLesson(courseName) {
-  //   if (this.startedGroups.some((startedGroup) => startedGroup.courseName === courseName)) {
-  //     if (!this.startedGroups.some((startedGroup) => startedGroup.totalLessons === startedGroup.passedLessons)) {
-  //       startedGroup.passedLessons ++;
-  //       console.log(`${courseName} ${startedGroup.passedLessons}`);
-  //     }
-  //     else {
-  //       console.log(`You doing somting wrong2`);
-  //     }
-  //   } else {
-  //     console.log(`You doing somting wrong1`);
-  //   }
-  // }
+  doneLesson(courseName) {
+    const foundCourse = this.startedGroups.find((startedGroup) => startedGroup.courseName === courseName);
+    if (foundCourse) {
+        foundCourse.passedLessons ++;
+      console.log(`Gorup name ${courseName} : completed classes ${foundCourse.passedLessons}`);   
+    } else {
+      console.log(`All lessons are passed in this course ${courseName}`);
+    }
+  }
 };
 
 itSchool.on(
@@ -100,20 +96,15 @@ itSchool.on(
 );
 
 
-
 // старт групп
-itSchool.startLearningGroup("Front-end Pro", 10, 10, 6);
-itSchool.startLearningGroup("Front-end Basic", 13, 10, 10);
-itSchool.startLearningGroup("Python Basic", 6, 13, 13);
-
-console.log("----");
+itSchool.startLearningGroup("Front-end Pro", 10, 2);
+// itSchool.startLearningGroup("Front-end Basic", 13, 10, 10);
+// itSchool.startLearningGroup("Python Basic", 6, 13, 13);
 itSchool.doneLesson("Front-end Pro");
-console.log("----");
-// конец групп
-console.log("End group");
-itSchool.endLearningGroup("Front-end Basic", 10);
-itSchool.endLearningGroup("Python Basic", 13);
+itSchool.doneLesson("Front-end Pro");
+// itSchool.removeCourse("Front-end Pro");
+// itSchool.endLearningGroup("Front-end Basic", 10);
+// itSchool.endLearningGroup("Python Basic", 13);
 
 
-console.log(itSchool.availableCourses);
 
