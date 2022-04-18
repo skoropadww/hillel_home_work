@@ -1,7 +1,17 @@
 class LearningGroup {
-  // passedLessons, courseName, teacherName, amountOfStudents
+  passedLessons = [];
 
-  addLesson(title, topics) {
-    //
+  constructor(courseName, teacherName, amountOfStudents) {
+    this.courseName = courseName;
+    this.teacherName = teacherName;
+    this.amountOfStudents = amountOfStudents;
+  }
+
+  doneLesson(title, topics) {
+    if(this.passedLessons.some((lesson) => lesson.title === title)){
+      return `Lesson with title ${title} alredy exests.`;
+    }
+    
+    this.passedLessons.push(new Lesson(title, topics));
   }
 }
