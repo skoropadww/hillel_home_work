@@ -22,10 +22,13 @@
 
     // // запуск новой группы
     itSchool.startLearningGroup("Front-end Pro", "Andrii Doroshenko", 10);
+    itSchool.startLearningGroup("Front-end Basic", "Andrii Doroshenko", 10);
+    itSchool.startLearningGroup("Front-end Basic", "Andrii Doroshenko", 10);
 
     // // работа с группой
-    const group = itSchool.getLearningGroups("Front-end Pro").find((group) => group.teacherName === "Andrii Doroshenko");
-    group.addLesson("Classes in JS", ["Object.create()", "Function Constructors", "Classes"]);
+    const group = itSchool.getLearningGroups("Front-end Pro")
+    .find((group) => group.teacherName === "Andrii Doroshenko");
+    group.doneLesson("Classes in JS", ["Object.create()", "Function Constructors", "Classes"]);
   </script>
 </body>
 
