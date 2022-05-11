@@ -1,0 +1,178 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+h1, h2, h3, h4, h5, h6{
+	text-transform: uppercase;
+	font-weight: 700;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+html {
+	height: 100%;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body {
+  background-color: brown;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+._container {
+  max-width: 1170px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+._title {
+  font-size: 40px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+.user {
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.user span{
+  margin-right: 10px;
+  color: aqua;
+}
+
+.toDo p{
+  color: rgb(255, 111, 0);
+  font-size: 20px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.toDo__item {
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  border:1px solid orange;
+  border-radius: 10px;
+  width: 50%;
+  cursor: pointer;
+}
+
+.todo-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo-block__wrapper {
+  max-width: 600px;
+  width: 100%;
+  background-color: #e3e3e3;
+  border-radius: 10px ;
+  min-height: 500px;
+}
+
+.todo-block__top {
+  padding: 27px 20px;
+  border-radius: 10px ;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #c4c4c4;
+}
+
+.todo-block__input {
+  padding: 9px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 10px;
+  border-color: transparent;
+}
+
+.todo-block__btn {
+  padding: 10px 25px;
+  border-radius: 10px;
+  background-color: #e3e3e3;
+  border: 1px solid #e3e3e3;
+  color: #000;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.todo-block__btn:hover {
+  border-color: #000;
+}
+
+.todo-block__body {
+  padding: 0 20px;
+  color: #000;
+}
+
+.todo-block__list {
+  
+}
+
+.todo-block__list li {
+  padding: 20px 0;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.todo-block__list li:not(:last-child){
+  border-bottom: 1px solid #000;
+}
+
+.todo-block__list li label._active{
+  text-decoration: line-through;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+input[type="checkbox"]:checked p {
+  text-decoration: line-through;
+}
