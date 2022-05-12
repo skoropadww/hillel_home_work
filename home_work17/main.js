@@ -228,21 +228,20 @@ Number.prototype.minus = function (value) {
     Учитываются лишь символы; пробелы или знаки препинания в расчет не берутся.
 */
 
-function sort (str) {
-  return str.replace(/\s+/g, '').toLowerCase().split('').sort().join('');
+function isAnagram(str1, str2) {
+  str1 = str1.toLowerCase().split('').sort().join('');
+  str2 = str2.toLowerCase().split('').sort().join('');
+
+  return str1 === str2;
 }
 
-
-function anagram(firstWord, secondWord) {
-  if (firstWord.trim() === secondWord.trim()) {
-    return console.log("Не является аннограмой");
-  }
-  if (sort(firstWord) === sort(secondWord)) {
-    return console.log(`${firstWord} : ${secondWord} - является аннограмой`);
-  }
-}
-
-// anagram('Eleven plus Two', 'Twelve plus one');
+console.log(
+  isAnagram('стационар', 'соратница'),
+  isAnagram('стационар', 'стационар'),
+  isAnagram('Eleven plus Two', 'Twelve plus one'),      
+  isAnagram('Statue of Liberty', 'Built to stay free'), 
+  isAnagram('Older and Wiser', 'I learned words'),
+);
 
 /*
     * 4. Напишите функцию, которая будет удалять повторяющиеся значения и возвращать получившийся массив.
@@ -253,15 +252,13 @@ const words = ['orange', 'banana', 'banana', 'grapefruit', 'banana', 'grapefruit
 
 function solution(words) {
   let obj = {};
-  
-  for (let i = 0; i < words.length; i++) {
-    let str = words[i];
-    obj[str] = true; // запомнить строку в виде свойства объекта
-  }
-  return Object.keys(obj);
+  words.forEach(item => {
+    obj[item] = (obj[item] || 0) + 1;
+  });
+  return obj;
 }
 
-console.log(solution(words));
+// console.log(solution(words));
 
 /*
     ** 5. Анаграмма
@@ -269,18 +266,18 @@ console.log(solution(words));
     Нужно написать функцию, которая проверяет, являются ли две строки анаграммами, причем регистр букв не имеет значения.
     Учитываются лишь символы; пробелы или знаки препинания в расчет не берутся.
 */
-function sort(str) {
-  return str.replace(/\s+/g, '').toLowerCase().split('').sort().join('');
+
+function isAnagram(str1, str2) {
+  str1 = str1.toLowerCase().split('').sort().join('');
+  str2 = str2.toLowerCase().split('').sort().join('');
+
+  return str1 === str2;
 }
 
-
-function anagram(firstWord, secondWord) {
-  if (firstWord.trim() === secondWord.trim()) {
-    return console.log("Не является анаграммой");
-  }
-  if (sort(firstWord) === sort(secondWord)) {
-    return console.log(`${firstWord} : ${secondWord} - является анаграммой`);
-  }
-}
-
-// anagram('Eleven plus Two', 'Twelve plus one');
+console.log(
+  isAnagram('стационар', 'соратница'),
+  isAnagram('стационар', 'стационар'),
+  isAnagram('Eleven plus Two', 'Twelve plus one'),
+  isAnagram('Statue of Liberty', 'Built to stay free'),
+  isAnagram('Older and Wiser', 'I learned words'),
+);
