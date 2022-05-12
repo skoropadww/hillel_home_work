@@ -1,7 +1,7 @@
 // Start writing JavaScript here!
-const calculator = document.querySelector('.calculator')
-const keys = calculator.querySelector('.calculator__keys')
-const display = calculator.querySelector('.calculator__display')
+const calculator   = document.querySelector('.calculator')
+const keys         = calculator.querySelector('.calculator__keys')
+const display      = calculator.querySelector('.calculator__display')
 const operatorKeys = keys.querySelectorAll('[data-type="operator"]')
 
 keys.addEventListener('click', (event) => {
