@@ -38,12 +38,12 @@ btnAdd.addEventListener('click', event => {
     
     printListTodoItems(todoItem, listTodo);
 
-    if (checkbox === true) {
-      for (let i = 0; i < checkbox.length; i++) {
-        const element = checkbox[i];
-        console.log(element);
-      }
-    }
+    // if (checkbox === true) {
+    //   for (let i = 0; i < checkbox.length; i++) {
+    //     const element = checkbox[i];
+    //     console.log(element);
+    //   }
+    // }
 
     inputTodo.value = "";
 
@@ -58,8 +58,9 @@ function printListTodoItems(param, plase) {
   plase.innerHTML = '';
 
   for (let i = 0; i < param.items.length; i++) { 
-    let result = createListItem(i, todoItem.items[i].description, plase)
-    plase.insertAdjacentHTML('afterbegin', result);
+    let result = createListItem(i, todoItem.items[i].description, plase);
+    console.log(result);
+    plase.appendChild(result);
   }
 };
 
