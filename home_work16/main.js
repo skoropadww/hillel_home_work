@@ -77,7 +77,7 @@ function createListItem(id, desc, plase) {
   liItem.appendChild(labelItem);
   liItem.appendChild(inputChek);
 
-  inputChek.addEventListener('change', (event) => {
+  inputChek.addEventListener('click', (event) => {
     let idInput = event.target.getAttribute('id');
     let forLable = listTodo.querySelector(`[for="${idInput}"]`);
     forLable.classList.toggle('_active');
