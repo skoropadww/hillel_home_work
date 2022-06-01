@@ -1,0 +1,120 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+h1, h2, h3, h4, h5, h6{
+	text-transform: uppercase;
+	font-weight: 700;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+html {
+	height: 100%;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body {
+  background-color: brown;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+._container {
+  max-width: 1170px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+._title {
+  font-size: 40px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+.clicker-box {
+  height: 500px;
+  width: 700px;
+  background-color: #0c1b4e;
+  border-radius: 5px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.clicker-box__inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.clicker-box__number {
+  font-size: 200px;
+  text-align: center;
+  min-width: 300px;
+  width: max-content;
+  max-width: 512px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-weight: 700;
+}
+
+.clicker-box__button {
+  font-size: 30px;
+  font-weight: 700;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: 1px solid rgb(248, 90, 235);
+  color: rgb(248, 90, 235);
+  background-color: transparent;
+  transition-property:color,  background-color, border-color;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.clicker-box__button:hover {
+  color: #fff;
+  border-color: #fff;
+  background-color: rgb(248, 90, 235);
+}
