@@ -1,85 +1,100 @@
-let elementId = 1;
+const wrapper = document.querySelector('.wrapper'); 
 
-class ShoppingList {
-  list = [];
+class ShoppingList { 
+  constructor(titleList, author) { 
+    this.titleList = titleList, 
+    this.author = author, 
+    this.maxElements = 5, 
+    this.list = []
+  } 
+  
+  addItem(id, title, total, unit) { 
+    if (Object.values({ id, title, total, unit }).some(item => item === undefined)) { 
+      throw new Error(`Не добавлено. Причина: Добавляете пустой обьект`); 
+    } 
+    
+    if (total === '') { 
+      throw new Error(`${ title }: ${ unit }. - Не добавлено. Причина: Отсутсвует количество товара!`); 
+    } 
+    
+    if (this.list.length >= this.maxElements) { 
+      throw new Error(`Не добавлено. Причина: нельзя добавить больше ${ this.maxElements } товаров`); 
+    } 
+    if (!this.list.some(item => item.id === id)) { 
+      this.list.push(new ShoppingItem(id, title, total, unit)); 
+    } 
+  } 
+    
+  removeItem(id) { 
+    if (this.list.find(item => item.id === id)) { 
+      let delItem = this.list.find(item => item.id === id); 
+      const delBlock = document.createElement('div'); 
+      delBlock.classList.add('list'); 
 
-  constructor(title, author, maxListLength) {
-    this.title = title;
-    this.author = author;
-    this.maxListLength = maxListLength;
-  };
+      delBlock.style.backgroundColor = '#f3de94';
+      delBlock.style.padding = '15px';
+      delBlock.style.border = 'thick solid #e3b847'; 
+      delBlock.style.borderRadius = "15px";
 
-  addItem(title, count, unit) {
-    if (this.list.length >= this.maxListLength) {
-      throw new Error(`Список уже полон, ${title} уже не унести...`);
-    }
-
-    if (title === undefined || title === '') {
-      throw new Error(`Вы не заполнили поле title...`);
-    }
-
-    if (count === undefined || count === '') {
-      throw new Error(`Вы не заполнили поле count у ${title}...`);
-    }
-
-    if (unit === undefined || unit === '') {
-      throw new Error(`Вы не заполнили поле unit у ${title}...`);
-    }
-
-    this.list.push(new ShoppingListElement(title, count, unit));
-    elementId++;
-  };
-
-  removeItem(id) {
-    if (!this.list.find((elem) => elem.id === +id)) {
-      throw new Error(`Нет элемента с id №${id}...`);
-    }
-
-    this.list = this.list.filter((elem) => elem.id !== +id);
-  };
+      delBlock.textContent = `${ delItem.title }: ${ delItem.total } ${ delItem.unit }.- успешно удалено. id обьекта ${ id }`; wrapper.after(delBlock); 
+      this.list = this.list.filter(item => item.id !== id); 
+    } else 
+      throw new Error(`Не удалено!. Причина: Товар с id обьектом ${ id } не найден в списке`); 
+  } 
 }
+ 
+ 
+  class ShoppingItem { 
+    constructor(id, title, total, unit) { 
+      this.id = id, 
+      this.title = title, 
+      this.total = total, 
+      this.unit = unit 
+    } 
+  } 
+  
+  
+let listItem = new ShoppingList("Владимир", "Продукты"); 
+  
+function printList() { 
+  let err = document.createElement('div'); 
+    
+  try { 
 
-class ShoppingListElement {
-  constructor(title, count, unit) {
-    this.id = elementId;
-    this.title = title;
-    this.count = count;
-    this.unit = unit;
-  };
-}
+    listItem.addItem(1, "Печенье", "500", "г."); 
+    listItem.addItem(2, "Вода", "2", "л."); 
+    listItem.addItem(3, "Сахар", "1", "кг."); 
+    listItem.addItem(5, "Кофе", "200", "г."); 
+    listItem.removeItem(1); 
+    listItem.removeItem(3);
+    listItem.addItem(4, "Кола", "", "л.");  
+    listItem.addItem();
 
-const shoppingListObject = new ShoppingList('Покупки', 'Никита Мирошниченко', '4');
+  } catch (error) { 
+    console.log(error); 
+    err.classList.add('list'); 
 
-(() => {
-  try {
-    shoppingListObject.addItem('', '3', 'пачках');
-  } catch (ex) {
-    console.log(ex)
-  }
+    err.style.backgroundColor = '#f39494'; 
+    err.style.padding = '15px';
+    err.style.border = 'thick solid #ae5d5d';
+    err.style.borderRadius = "15px"; 
 
-  try {
-    shoppingListObject.addItem('Кефир', '3', 'л');
-  } catch (ex) {
-    console.log(ex)
-  }
+    err.textContent = error.message; 
+  } finally { 
+    listItem.list.forEach(item => { 
+      let element = document.createElement('div'); 
+      element.classList.add('list'); 
 
-  try {
-    shoppingListObject.addItem('Колбаса', '', 'палка');
-  } catch (ex) {
-    console.log(ex)
-  }
+      element.style.backgroundColor = '#a1f394';
+      element.style.padding = '15px';
+      element.style.border = 'thick solid #68ae5d';
+      element.style.borderRadius = "15px";
 
-  try {
-    shoppingListObject.removeItem('7');
-  } catch (ex) {
-    console.log(ex)
-  }
+      wrapper.append(element); 
+      element.textContent = `${item.title}: ${item.total} ${item.unit}. - успешно добавлено. id обьекта ${item.id}`}); 
+      wrapper.append(err); 
+      console.log(listItem.list); 
+  } 
+} 
 
-  try {
-    shoppingListObject.addItem('яблоко', '', 'шт');
-  } catch (ex) {
-    console.log(ex)
-  } finally {
-    console.log(shoppingListObject.list);
-  }
-})();
+printList();
