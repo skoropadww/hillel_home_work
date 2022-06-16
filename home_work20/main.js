@@ -42,16 +42,36 @@ class ShoppingList {
       throw new Error(`Не удалено!. Причина: Товар с id обьектом ${ id } не найден в списке`); 
   } 
 
-  iteratorMethod(){
-    let inIteration = true;
-    const iterator = this.list[Symbol.iterator]();
+  // iteratorMethod(){
+  //   let inIteration = true;
+  //   const iterator = this.list[Symbol.iterator]();
 
-    while (inIteration){
-      const {value, done} = iterator.next();
-      inIteration = !done;
-      console.log(value);
-    }
-  }
+  //   while (inIteration){
+  //     const {value, done} = iterator.next();
+  //     inIteration = !done;
+  //     console.log(value);
+  //   }
+  // }
+
+  // iteratorMethod() {
+  //   let iterator = 0;
+  //   return {
+  //     next() {
+  //       iterator ++;
+  //       if (iterator <= this.list.length) {
+  //         return {
+  //           value: iterator,
+  //           done: false
+  //         }
+  //       }
+
+  //       return {
+  //         value: undefined,
+  //         done: true
+  //       }
+  //     }
+  //   };
+  // }
 }
  
  
@@ -111,20 +131,41 @@ function printList() {
 printList();
 
 function printConsoleList() {
-  let listIter = new ShoppingList("Виталий", "Товары"); 
+  let listItemIter = new ShoppingList("Виталий", "Товары"); 
 
-  listIter.addItem(1, "Печенье", "500", "г.");
-  listIter.addItem(2, "Вода", "2", "л.");
-  listIter.addItem(3, "Сахар", "1", "кг.");
-  listIter.addItem(4, "Кофе", "200", "г."); 
+  listItemIter[Symbol.iterator] = () =>{
+    let iterator = -1;
+    return {
+      next() {
+        iterator += 1;
+        if (iterator <= listItemIter.list.length) {
+          return {
+            value: listItemIter.list[iterator],
+            done: false
+          }
+        }
+
+        return {
+          value: undefined,
+          done: true
+        }
+      }
+    };
+  }
 
 
-  console.log("while in console -----------");
-  listIter.iteratorMethod();
+  listItemIter.addItem(1, "Печенье", "500", "г.");
+  listItemIter.addItem(2, "Вода", "2", "л.");
+  listItemIter.addItem(3, "Сахар", "1", "кг.");
+  listItemIter.addItem(4, "Кофе", "200", "г."); 
+
+  console.log(typeof listItemIter);
+
  
   console.log("For of in console -----------");
-  for (const iterator of listIter.list) {
-    console.log(iterator);
+
+  for (const value of listItemIter) {
+    console.log(value);
   }
 }
 
