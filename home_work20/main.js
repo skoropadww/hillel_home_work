@@ -43,11 +43,14 @@ class ShoppingList {
   } 
 
   iteratorMethod(){
-    for (const iterator of this.list) {
-    }
-
+    let inIteration = true;
     const iterator = this.list[Symbol.iterator]();
-    console.log(iterator.next().value);
+
+    while (inIteration){
+      const {value, done} = iterator.next();
+      inIteration = !done;
+      console.log(value);
+    }
   }
 }
  
@@ -69,14 +72,14 @@ function printList() {
     
   try { 
 
-    listItem.addItem(1, "Печенье", "500", "г."); 
-    listItem.addItem(2, "Вода", "2", "л."); 
-    listItem.addItem(3, "Сахар", "1", "кг."); 
-    listItem.addItem(5, "Кофе", "200", "г."); 
-    listItem.removeItem(1); 
-    listItem.removeItem(3);
-    listItem.addItem(4, "Кола", "", "л.");  
-    listItem.addItem();
+    // listItem.addItem(1, "Печенье", "500", "г."); 
+    // listItem.addItem(2, "Вода", "2", "л."); 
+    // listItem.addItem(3, "Сахар", "1", "кг."); 
+    // listItem.addItem(5, "Кофе", "200", "г."); 
+    // listItem.removeItem(1); 
+    // listItem.removeItem(3);
+    // listItem.addItem(4, "Кола", "", "л.");  
+    // listItem.addItem();
 
   } catch (error) { 
     console.log(error); 
@@ -108,15 +111,22 @@ function printList() {
 printList();
 
 function printConsoleList() {
+  let listIter = new ShoppingList("Виталий", "Товары"); 
+
+  listIter.addItem(1, "Печенье", "500", "г.");
+  listIter.addItem(2, "Вода", "2", "л.");
+  listIter.addItem(3, "Сахар", "1", "кг.");
+  listIter.addItem(4, "Кофе", "200", "г."); 
 
 
-  for (const iterator of listItem.list) {
-    // console.log(iterator);
+  console.log("while in console -----------");
+  listIter.iteratorMethod();
+ 
+  console.log("For of in console -----------");
+  for (const iterator of listIter.list) {
+    console.log(iterator);
   }
-
-  const iterator1 = listItem.list[Symbol.iterator]();
-  console.log(iterator1.next().value);
-  console.log(iterator1.next().value);
-
 }
+
+printConsoleList();
 
