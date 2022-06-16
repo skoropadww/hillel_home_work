@@ -41,6 +41,14 @@ class ShoppingList {
     } else 
       throw new Error(`Не удалено!. Причина: Товар с id обьектом ${ id } не найден в списке`); 
   } 
+
+  iteratorMethod(){
+    for (const iterator of this.list) {
+    }
+
+    const iterator = this.list[Symbol.iterator]();
+    console.log(iterator.next().value);
+  }
 }
  
  
@@ -98,3 +106,17 @@ function printList() {
 } 
 
 printList();
+
+function printConsoleList() {
+
+
+  for (const iterator of listItem.list) {
+    // console.log(iterator);
+  }
+
+  const iterator1 = listItem.list[Symbol.iterator]();
+  console.log(iterator1.next().value);
+  console.log(iterator1.next().value);
+
+}
+
