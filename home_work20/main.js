@@ -108,6 +108,21 @@ printList();
 function printConsoleList() {
   let listItemIter = new ShoppingList("Виталий", "Товары"); 
 
+  listItemIter.addItem(1, "Печенье", "500", "г.");
+  listItemIter.addItem(2, "Вода", "2", "л.");
+  listItemIter.addItem(3, "Сахар", "1", "кг.");
+  listItemIter.addItem(4, "Кофе", "200", "г."); 
+ 
+  console.log("For of in console -----------");
+
+  for (const value of listItemIter) {
+    console.log(value);
+  }
+}
+
+printConsoleList();
+
+// example
   // listItemIter[Symbol.iterator] = () =>{
   //   let iterator = -1;
   //   return {
@@ -127,19 +142,3 @@ function printConsoleList() {
   //     }
   //   };
   // }
-
-
-  listItemIter.addItem(1, "Печенье", "500", "г.");
-  listItemIter.addItem(2, "Вода", "2", "л.");
-  listItemIter.addItem(3, "Сахар", "1", "кг.");
-  listItemIter.addItem(4, "Кофе", "200", "г."); 
- 
-  console.log("For of in console -----------");
-
-  for (const value of listItemIter) {
-    console.log(value);
-  }
-}
-
-printConsoleList();
-
