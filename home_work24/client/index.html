@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page from server</title>
+  <style>
+    .container {
+      display: block;
+      margin: 0 auto;
+      width: 600px;
+    }
+
+    ._title {
+      font-size: 45px;
+      font-weight: 700;
+      color: #40123f;;
+      margin-bottom: 40px;
+    }
+
+
+    button {
+      margin-left: 5px;
+      border: 1px solid #0a0a0a;
+      background: #bc63ba;
+      color: wheat;
+      padding: 10px 15px;
+      text-transform: uppercase;
+      transition: all 1s ease-in-out;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #72cacb;
+    }
+
+    input {
+      font-size: 12px;
+      box-shadow: #b8e5cb;
+      border: 2px solid rgb(185 129 5);
+      text-align: center;
+      padding: 10px 15px;
+      text-align: left;
+      flex-grow: 1;
+      margin-right: 10px;
+    }
+
+    input:hover {
+      background-color: #ffffff;
+      border: 2px solid rgba(236, 155, 155, 0.77);
+      transition: all 1s ease-in-out;
+
+    }
+
+    input:visited {
+      background-color: #ffffff;
+      border: 2px solid rgba(236, 155, 155, 0.77);
+    }
+
+    .sse {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .progressBar {
+      display: flex;
+    }
+
+    .statusBar {
+      display: block;
+      width: 25%;
+      height: auto;
+      margin-right: 5px;
+      background-color: #ffffff;
+      text-align: center;
+      font-size: 14px;
+      border: 2px solid #72cacb;
+      padding: 10px;
+      color: rgba(229, 88, 114, 0.77);
+
+    }
+
+    .targetStatusBar {
+      display: block;
+      width: 25%;
+      height: auto;
+      font-size: 14px;
+      text-align: center;
+      border: 2px solid #72cacb;
+      border-radius: 6px;
+      color: rgba(229, 88, 114, 0.77);
+      background-color: #b8e5cb;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <div class="_title">Pizza Tracker</div>
+    <section class="sse">
+      <input placeholder="Введите название пиццы" type="text">
+      <button>Оформить заказ</button>
+    </section>
+
+    <section class="progressBar">
+      <div class="statusBar"> start order</div>
+      <div class="statusBar"> cooking order</div>
+      <div class="statusBar"> packing order</div>
+      <div class="statusBar"> delivering order</div>
+    </section>
+
+  </main>
+
+  <script>
+
+    let url = "http://localhost:8080/sse"
+    const button = document.querySelector('button');
+    const input = document.querySelector('input')
+    const targetBlock = document.querySelectorAll('div');
+
+
+    button.addEventListener('click', () => {
+
+      postRequest();
+
+      const eventSource = new EventSource(url);
+
+      eventSource.addEventListener("order-not-found", () => {
+        console.log("order-not-found");
+        eventSource.close();
+      });
+
+
+      eventSource.addEventListener("pizza-order-status-update", (event) => {
+        console.log(`status order : ${event.data}`);
+        if (event.data) {
+          targetBlock.forEach(item => {
+            event.data === item.innerText ?
+              item.classList.add('targetStatusBar') :
+              item.classList.add('statusBar')
+          })
+        }
+
+        if (event.data === 'delivering order') {
+          eventSource.close();
+
+          setTimeout(() => {
+            targetBlock.forEach(item => item.classList.remove('targetStatusBar'));
+          }, 2000)
+        };
+      });
+    });
+
+
+    async function postRequest() {
+
+      const response = await fetch('http://localhost:8080/orderPizza', {
+        method: 'POST',
+        body: JSON.stringify(input.value)
+      });
+
+      input.value = '';
+      const data = await response.json();
+      console.log(data)
+    }
+
+  </script>
+</body>
+
+</html>
