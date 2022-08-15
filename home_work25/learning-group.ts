@@ -17,7 +17,6 @@ class LearningGroup {
       return `Lesson with title ${title} already exist.`;
     }
     
-    // @ts-ignore
     this.passedLessons.push(new Lesson(title, topics));
   }
 }

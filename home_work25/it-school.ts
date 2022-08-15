@@ -25,15 +25,12 @@ class ITSchool {
     if (this.availableCourses.some((course) => course.name === courseName)){
       return `Course ${courseName} already exists.`;
     }
-    // @ts-ignore
     this.availableCourses.push(new Course(courseName, totalLessons, availableTeachersAmount));
   }
 
   startLearningGroup(courseName: string, teacherName: string, amountOfStudents: number): void {
-    // @ts-ignore
     const courseForNewLearningGroup = this.availableCourses.find((course) => (course.name === courseName) && (course.availableTeachersAmount));
     if (courseForNewLearningGroup){
-      // @ts-ignore
       this.startedLearningGroups.push(new LearningGroup(courseName, teacherName, amountOfStudents));
       courseForNewLearningGroup.availableTeachersAmount -= 1;
     }
